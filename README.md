@@ -12,3 +12,5 @@ Both extended documentation and a python notebook example will be provided soon.
 Statistics on the dataset to be used (https://bimcv.cipf.es/bimcv-projects/bimcv-covid19/) will be as well provided.
 
 An example pipeline (to be customized soon according to the dataset) is provided in examples/pipeline_example.py 
+
+"lung_segmentation" contains experimental deeplearning-based lung segmentation code. It requires a UNet pre-trained model, to be decided whether to include it or not in the pre-processing pipeline.
