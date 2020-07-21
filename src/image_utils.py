@@ -16,7 +16,7 @@ def equalize_image(source):
 
 #intended as contrast enhancement
 def normalization(source):
-	return cv2.normalize(source,None,0,255,cv2.cv.NORM_MINMAX)
+	return cv2.normalize(source,None,0,255,cv2.NORM_MINMAX)
 
 #to binarize the image
 def threshold(source, T = 0.5):
@@ -24,15 +24,26 @@ def threshold(source, T = 0.5):
 	ret, equ = cv2.threshold(img, T_int, 255,cv2.THRESH_BINARY)
 	return equ
 
-#we assume here sorce dims <= target_dims
-#we also assume all the input shapes are even
-def shape_same(source, target_dims):
-	delta_x = int((target_dims[0] - source.shape[0])/2)
-	delta_y = int((target_dims[1] - source.shape[1])/2)
-	dest = source.copy()
-	if (delta_x > 0) or (delta_y > 0):
-		dest = cv2.copyMakeBorder(dest,delta_x,delta_y,delta_y,delta_x,cv2.BORDER_CONSTANT,value=[0,0,0])
-	return dest
+def shape_as(source, target_dims=(1024, 1024)):
+	max_height = 1024
+	max_width = 1024
+	height,width = source.shape
+
+	# only shrink if img is bigger than required
+	if target_dims[0] < height or target_dims[1] < width:
+		# get scaling factor
+		scaling_factor = target_dims[0] / float(height)
+		if target_dims[1]/float(width) < scaling_factor:
+			scaling_factor = target_dims[1] / float(width)
+		# resize image
+		source = cv2.resize(source, None, fx=scaling_factor, fy=scaling_factor, interpolation=cv2.INTER_AREA)
+	height,width = source.shape
+	if target_dims[0] > height or target_dims[1] > width:
+		delta_x = int((target_dims[0] - source.shape[0])/2)
+		delta_y = int((target_dims[1] - source.shape[1])/2)
+		if (delta_x > 0) or (delta_y > 0):
+			source = cv2.copyMakeBorder(source,delta_x,delta_x,delta_y,delta_y,cv2.BORDER_CONSTANT,value=[0,0,0])
+	return source
 
 def equalize_image(path):
 	img = cv2.imread(path)

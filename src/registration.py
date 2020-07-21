@@ -6,12 +6,12 @@ import pyelastix
 def registration(to_register, reference):
 	#internal elastix parameters
 	params = pyelastix.get_default_params(type='RIGID')
-	params.NumberOfResolutions = 8
+	params.NumberOfResolutions = 4
 	params.AutomaticTransformInitialization = True
 	params.AutomaticScalesEstimation = False
 	params.NumberOfHistogramBins = 64
 	params.MaximumStepLength = 5.0
-	params.MaximumNumberOfIterations = 2000
+	params.MaximumNumberOfIterations = 500
 
-	registered, field = pyelastix.register(to_register, reference, params)
+	registered, field = pyelastix.register(to_register, reference, params, verbose=0)
 	return registered
