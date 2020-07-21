@@ -127,3 +127,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+src/preproc
+src/excluded
+src/cxr_path.csv
