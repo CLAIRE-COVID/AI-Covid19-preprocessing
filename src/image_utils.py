@@ -1,10 +1,15 @@
 import cv2
 import numpy as np
+#import imageio
 
 #assumption: all the images to process are grey-scale
 def imgtonumpy(source):
-	img = cv2.imread(source)
-	if len(img.shape) > 1:
+	#img = imageio.imread(source)
+	#print(img.shape)
+	#error()
+	img = cv2.imread(source, cv2.IMREAD_ANYDEPTH)
+	if len(img.shape) > 2:
+		#print("WARNING!")
 		img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 	return img
 
