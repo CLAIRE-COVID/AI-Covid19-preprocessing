@@ -18,11 +18,11 @@ for patient_path in patients:
 				print(filex)
 				x = imgtonumpy(filex).astype(numpy.float)
 				f = open("cxr_path.csv", "a")
-				f.write("{}\t{}\t{}\t{}\n".format(filex, x.shape, x.min(), x.max()))
+				f.write("{}\t{}\t{}\t{}\t{}\n".format(filex, x.shape[0], x.shape[1], x.min(), x.max()))
 				f.close()
 				x = shape_as(x)
 				x = normalization(x)
-				x = cv2.GaussianBlur(x,(5,5),cv2.BORDER_DEFAULT)
+				#x = cv2.GaussianBlur(x,(5,5),cv2.BORDER_DEFAULT)
 				#if "lateral" not in filex:
 				#	x = registration(x, ref_numpy)
 				numpytoimg(x, filex)
