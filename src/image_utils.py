@@ -3,10 +3,13 @@ import numpy as np
 
 #assumption: all the images to process are grey-scale
 def imgtonumpy(source):
-	img = cv2.imread(path)
+	img = cv2.imread(source)
 	if len(img.shape) > 1:
 		img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 	return img
+
+def numpytoimg(numpyarray, destination):
+	cv2.imwrite(destination, numpyarray)
 
 def equalize_image(source):
 	return cv2.equalizeHist(source)
