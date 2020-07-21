@@ -5,8 +5,8 @@ import pyelastix
 #potential criticalities: different size. Here we assume they are at the same size.
 def registration(to_register, reference):
 	#internal elastix parameters
-	params = pyelastix.get_default_params(type='RIGID')
-	params.NumberOfResolutions = 4
+	params = pyelastix.get_default_params(type='AFFINE')
+	params.NumberOfResolutions = 8
 	params.AutomaticTransformInitialization = True
 	params.AutomaticScalesEstimation = False
 	params.NumberOfHistogramBins = 64
