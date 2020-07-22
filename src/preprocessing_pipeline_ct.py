@@ -10,8 +10,8 @@ import pydicom
 from os import path
 from matplotlib import pyplot as plt
 
-#root = '/home/ubuntu/dataset_claire_1/'
-root = '/home/tarta/dataset_claire/V1.0/bimcv_covid19_posi_subjects_1'
+root = '/home/ubuntu/dataset_claire_1/'
+#root = '/home/tarta/dataset_claire/V1.0/bimcv_covid19_posi_subjects_1'
 
 os.makedirs("preproc", exist_ok=True)
 os.makedirs("excluded", exist_ok=True)
@@ -20,12 +20,10 @@ os.makedirs("registered", exist_ok=True)
 ref_numpy = imgtonumpy("reference.png").astype(numpy.float)
 patients = glob.glob(os.path.join(root,"*"))
 for patient_path in patients:
-	files = glob.glob(patient_path+"/**/*.png", recursive=True)
+	files = glob.glob(patient_path+"/**/*.nii.gz", recursive=True)
 	if len(files)>0:
 			for filex in files:
-				if "mod-ct" in filex:
-					print(filex)
-					error()
+				print(filex)
 				'''
 				if path.exists(filex.replace("png", "json")):
 					flag_excluded = False
