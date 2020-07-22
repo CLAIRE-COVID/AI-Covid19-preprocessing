@@ -130,4 +130,5 @@ dmypy.json
 
 src/preproc
 src/excluded
+src/registered
 src/cxr_path.csv
