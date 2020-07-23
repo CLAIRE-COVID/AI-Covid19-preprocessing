@@ -133,3 +133,4 @@ src/excluded
 src/registered
 src/preproc_ct
 *.csv
+*.tar.gz
