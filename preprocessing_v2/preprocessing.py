@@ -26,7 +26,7 @@ dest_masked_folder = 'final3_masked'
 dest_bb_folder = 'final3_BB'
 
 patients = glob.glob(os.path.join(root,"*"))
-'''
+
 for patient_num, patient_path in tqdm(enumerate(patients)):
     files = glob.glob(patient_path+"/**/*.nii.gz", recursive=True)
     if len(files)>0:
@@ -101,7 +101,7 @@ for patient_num, patient_path in tqdm(enumerate(patients)):
                                 os.makedirs(os.path.dirname(dest))
                             numpytoimg(bb_image,dest)
 
-'''
+
 
 # remove patients with imgs < 50
 imgs_path = dest_folder
@@ -122,7 +122,7 @@ for patient_path in tqdm(patients):
         shutil.rmtree(patient_path.replace(dest_folder,dest_masked_folder))
     
 
-
+# save dataset info
 df = pd.DataFrame.from_dict(patient_dict,orient='index')
 df.sort_values(by=0).to_csv(imgs_path+'.csv')
 
