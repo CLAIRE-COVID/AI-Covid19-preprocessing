@@ -1,0 +1,51 @@
+Bootstrap: docker
+From: pytorch/pytorch:1.6.0-cuda10.1-cudnn7-runtime
+Stage: build
+
+
+%files
+    src/image_utils.py                          /opt/claire-covid/
+    src/preprocessing_pipeline.py    		    /opt/claire-covid/
+    src/preprocessing_pipeline_ct.py    		/opt/claire-covid/
+    src/preprocessing_pipeline_ct_v2.py    		/opt/claire-covid/
+    src/reference.png        		            /opt/claire-covid/
+    src/registration.py        		            /opt/claire-covid/
+    src/segmentation                            /opt/claire-covid/
+
+%environment
+    export PYTHONPATH="${PYTHONPATH}:/opt/claire-covid"
+
+%post
+    # Download apt packages
+    apt-get update
+    apt-get install -y --no-install-recommends \
+        curl                                   \
+        python3-opencv
+    apt-get clean
+    rm -rf /var/lib/apt/lists/*
+
+    # Download UNet model
+    curl                                            \
+        -fsSL                                       \
+        -o /opt/claire-covid/unet_r231-d5d2fc3d.pth \
+        https://github.com/JoHof/lungmask/releases/download/v0.0/unet_r231-d5d2fc3d.pth
+
+    # Download conda dependencies
+    /opt/conda/bin/pip install --no-cache-dir   \
+        fill-voids==2.0.1                       \
+        matplotlib==3.3.2                       \
+        nibabel==3.2.0                          \
+        opencv-python==4.5.1.48                 \
+        pydicom==2.1.1                          \
+        pyelastix==1.2                          \
+        scikit-image==0.18.1                    \
+        scipy==1.6.1                            \
+        SimpleITK==2.0.2
+
+%labels
+    org.label-schema.name       "CLAIRE COVID19 DNN Preprocessing"
+    org.label-schema.vcs-url    "https://github.com/CLAIRE-COVID/AI-Covid19-preprocessing"
+
+%help
+    Container for preprocessing of the BIMCV-COVID19+ dataset (https://github.com/CLAIRE-COVID/AI-Covid19-preprocessing)
+

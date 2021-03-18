@@ -1,4 +1,3 @@
-import numpy as np
 import pyelastix
 
 #target and reference are assumed numpy arrays

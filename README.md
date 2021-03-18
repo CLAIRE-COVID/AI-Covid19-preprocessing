@@ -14,3 +14,12 @@ Statistics on the dataset to be used (https://bimcv.cipf.es/bimcv-projects/bimcv
 An example pipeline (to be customized soon according to the dataset) is provided in examples/pipeline_example.py 
 
 "lung_segmentation" contains experimental deeplearning-based lung segmentation code. It requires a UNet pre-trained model, to be decided whether to include it or not in the pre-processing pipeline.
+
+## CT Preprocessing v2
+
+- generate lung masks (model weights are too large to upload on github, downlaod link will be available soon)
+- fixed windowing (-500, 1500)
+- removed non axial plane slices
+- removed slices with no lung or small lung (computing lung masks)
+- remove patients with a low number of slices (lower than 50)
+- generate a masked and a BB version

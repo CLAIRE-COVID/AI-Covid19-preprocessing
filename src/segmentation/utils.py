@@ -1,15 +1,15 @@
-import scipy.ndimage as ndimage
-import skimage.measure
-import numpy as np
-from torch.utils.data import Dataset
+import logging
 import os
 import sys
+
 import SimpleITK as sitk
-import pydicom as pyd
-import logging
-from tqdm import tqdm
 import fill_voids
+import numpy as np
+import pydicom as pyd
+import scipy.ndimage as ndimage
+import skimage.measure
 import skimage.morphology
+from torch.utils.data import Dataset
 
 
 def preprocess(img, label=None, resolution=[192, 192]):

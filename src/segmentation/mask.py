@@ -3,14 +3,12 @@ import os
 import sys
 import warnings
 
-import numpy as np
 import SimpleITK as sitk
+import numpy as np
 import skimage
 import torch
-from tqdm import tqdm
-
-import utils
-from resunet import UNet
+from segmentation import utils
+from segmentation.resunet import UNet
 
 logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 warnings.filterwarnings("ignore", category=UserWarning)
